@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+spring:
+  # 数据源配置
+  datasource:
+    url: jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.16.10.2)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = jbrc)))
+    username: JY_PUBSER
+    password: JY_PUBSER
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    #   数据源其他配置, 在 DruidConfig配置类中手动绑定
+    initialSize: 8
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+
+
+mybatis-plus:
+  # 指定实体类所有包
+  type-aliases-package: com.epsoft.oauth2.web.entities
+
+# 日志级别，会打印sql语句
+logging:
+  level:
+    com.mengxuegu.oauth2.web.mapper: debug
+
+
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.epsoft.oauth2.web.mapper.SysPermissionMapper">
+
+    <select id="findByUserId" resultType="com.epsoft.oauth2.web.entities.SysPermission">
+         select a.PERMISSIONID id,
+                '0' parent_id,
+                a.PERMNAME name,
+                a.PERMCODE code,
+                '' url,
+                '1' type,
+                '' icon,
+                a.PERMDESCRIBE remark,
+                sysdate create_date,
+                sysdate update_date
+           from s_permission a, s_role_permission b, s_user_role r
+          where a.PERMISSIONID = b.permissionid
+            and r.roleid = b.roleid
+            and r.userid = #{userId}
+    </select>
+
+</mapper>
